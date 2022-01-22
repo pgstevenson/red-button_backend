@@ -1,19 +1,8 @@
 version: "3.6"
 services:
-  nginx:
-    image: nginx:alpine
-    container_name: nginx
-    networks:
-      - net
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-    ports:
-      - 80:80
-      - 443:443
-    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
   db:
     image: postgres:11-alpine
-    container_name: db
+    container_name: red-button_db
     networks:
       - net
     environment:
@@ -28,7 +17,7 @@ services:
       - 5432:5432
   api:
     image: pgstevenson/red_button_api
-    container_name: api
+    container_name: red-button_api
     restart: on-failure
     networks:
       - net

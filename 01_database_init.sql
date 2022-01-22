@@ -20,11 +20,6 @@ CREATE SCHEMA app
     sys_admin boolean DEFAULT FALSE,
     active boolean DEFAULT TRUE
   )
-  /*
-  projects
-  Tables rules: project id < service id < task id
-  project (level 1) parent is NULL
-  */
   CREATE TABLE projects (
     id SERIAL PRIMARY KEY,
     name text,
@@ -44,7 +39,7 @@ CREATE SCHEMA app
     task_id int NOT NULL,
     description text
   );
-  
+
 ALTER DATABASE red_button SET search_path TO app, public;
 
 SET search_path TO app, public;
@@ -52,32 +47,19 @@ SET search_path TO app, public;
 /* Import data */
 
 INSERT INTO users (id, name, email, manager_id, time_zone, tier, client_admin, sys_admin)
-VALUES (1, 'Test Client', 'test_client@pgstevenson.com', NULL, 'Australia/Perth', 1, 't', 'f'),
-       (2, 'Test Sys Admin', 'test_sys@pgstevenson.com', 1, 'Australia/Perth', 0, 'f', 't'),
-       (3, 'Test Owner 1', 'test_owner@pgstevenson.com', 1, 'Australia/Perth', 0, 't', 'f'),
-       (4, 'Test PM 1', 'test_PM-1@pgstevenson.com', 1, 'Australia/Perth', 0, 'f', 'f'),
-       (5, 'Test User 1', 'test_User-1@pgstevenson.com', 1, 'Australia/Perth', 0, 'f', 'f'),
-       (6, 'Test Individual', 'test_individual@pgstevenson.com', NULL, 'Australia/Perth', 0, 't', 'f');
+VALUES (1, 'Paul Stevenson', 'paul@pgstevenson.com', NULL, 'Australia/Perth', 0, 't', 't');
 
 INSERT INTO projects (id, name, parent_id)
 VALUES (1, 'NON PROJECT', NULL),
        (2, 'Non Billable (Non project)', 1),
        (3, 'General / Manager Approval', 2),
-       (4, 'Training', 2),
-       (5, 'Project 1', NULL),
-       (6, 'Service 1', 5),
-       (7, 'Task 1', 6);
+       (4, 'Training', 2);
 
 INSERT INTO project_users (id, project_id, user_id, project_admin)
-VALUES (1, 1, 1, 't'),
-       (2, 1, 3, 't'),
-       (3, 1, 4, 't'),
-       (4, 1, 5, 'f'),
-       (5, 5, 6, 't');
+VALUES (1, 1, 1, 't');
 
 INSERT INTO events (id, user_id, start_time, end_time, task_id, description)
-VALUES (1, 5, '2021-12-12 08:00:00 Australia/Perth', '2021-12-12 08:15:00 Australia/Perth', 3, 'Row 1'),
-       (2, 5, '2021-12-12 08:15:00 Australia/Perth', '2021-12-12 08:30:00 Australia/Perth', 4, 'Row 2');
+VALUES (1, 5, '2022-01-25 08:30:00 Australia/Perth', '2022-01-25 08:35:00 Australia/Perth', 3, 'Office admin');
 
  /* Re-set sequences after data upload */
 
@@ -104,7 +86,7 @@ $BODY$
        ) SELECT ARRAY (SELECT name FROM parents ORDER BY id asc);
 $BODY$
   LANGUAGE sql;
-  
+
 /*
 user_ancestors
 For a given user_id, return the full manager/ancestor id path to client_id.
@@ -138,7 +120,7 @@ $BODY$
    ) SELECT ARRAY (SELECT id FROM children);
 $BODY$
   LANGUAGE sql;
-  
+
 /*
 client_users
 Returns an array of all user_id's nested under a client_id, could also be used
@@ -156,7 +138,7 @@ $BODY$
    ) SELECT ARRAY (SELECT id FROM children);
 $BODY$
   LANGUAGE sql;
-  
+
 /*
 user_projects
 Returns an array of all project id's (and associated service/task id(s)) to
