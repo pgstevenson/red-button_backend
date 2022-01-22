@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-@app.route('/api/v1/clients/<int:client_id>/users/<int:user_id>', methods=['GET'])
+@app.route('/' + api_path + '/v1/clients/<int:client_id>/users/<int:user_id>', methods=['GET'])
 def get_user(client_id, user_id):
 
     conn = None
@@ -13,14 +13,14 @@ def get_user(client_id, user_id):
         params = config()
         conn = psycopg2.connect(**params)
         cur = conn.cursor(cursor_factory = psycopg2.extras.DictCursor)
-        
+
         cur.execute("""
         SELECT id, name, email, time_zone FROM users WHERE id={}
         """.format(user_id))
         ans = cur.fetchall()
         for row in ans:
             user.append(dict(row))
-            
+
         cur.execute("""
         SELECT d.id, d.name, d.parent_id, project_users.project_admin FROM
         (
@@ -35,7 +35,7 @@ def get_user(client_id, user_id):
         ans = cur.fetchall()
         for row in ans:
             projects.append(dict(row))
-            
+
         cur.execute("""
         WITH tz AS (SELECT time_zone FROM users WHERE id={} LIMIT 1)
         SELECT id,
@@ -50,15 +50,15 @@ def get_user(client_id, user_id):
         ans = cur.fetchall()
         for row in ans:
             events.append(dict(row))
-        
+
         cur.execute("""
         SELECT id FROM users WHERE id = ANY(user_ancestors({})) AND manager_id IS NULL;
         """.format(user_id))
         res_client_id = cur.fetchone()[0]
-        
+
         res = dict(events = events, projects = projects, user = user)
         res['client_id'] = res_client_id
-            
+
         return jsonify(res)
     except (Exception, psycopg2.DatabaseError) as error:
         return str(error)

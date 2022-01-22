@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 
-@app.route('/api/v1/clients/create', methods=['GET', 'POST'])
+@app.route('/' + api_path + '/v1/clients/create', methods=['GET', 'POST'])
 def create_client():
-  
+
   conn = None
-  
+
   if request.args.get('name') is None:
     return jsonify({'code':400, 'key':'name'})
   if request.args.get('email') is None:
@@ -17,7 +17,7 @@ def create_client():
        'manager_id': 'NULL',
        'client_admin': 'TRUE',
        'active': 'FALSE'}
-       
+
   try:
     params = config()
     conn = psycopg2.connect(**params)

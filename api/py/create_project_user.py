@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-@app.route('/api/v1/clients/<int:client_id>/projects/<int:project_id>/users/<int:user_id>/create', methods=['GET', 'POST'])
+@app.route('/' + api_path + '/v1/clients/<int:client_id>/projects/<int:project_id>/users/<int:user_id>/create', methods=['GET', 'POST'])
 def create_project_user(client_id, project_id, user_id):
 
     conn = None

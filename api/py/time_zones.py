@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 
-@app.route('/api/v1/time_zones', methods=['GET'])
+@app.route('/' + api_path + '/v1/time_zones', methods=['GET'])
 def time_zones():
-  
+
   conn = None
   res = []
- 
+
   try:
     params = config()
     conn = psycopg2.connect(**params)

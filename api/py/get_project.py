@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-@app.route('/api/v1/clients/<int:client_id>/projects/<int:project_id>', methods=['GET'])
+@app.route('/' + api_path + '/v1/clients/<int:client_id>/projects/<int:project_id>', methods=['GET'])
 def get_project(client_id, project_id):
 
     conn = None

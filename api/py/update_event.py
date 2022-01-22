@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 
-@app.route('/api/v1/clients/<int:client_id>/users/<int:user_id>/events/<int:event_id>/update', methods=['GET', 'PATCH'])
+@app.route('/' + api_path + '/v1/clients/<int:client_id>/users/<int:user_id>/events/<int:event_id>/update', methods=['GET', 'PATCH'])
 def update_event(client_id, user_id, event_id):
 
     conn = None
 
     if len(request.args) == 0:
         return jsonify({'code':422, 'value':'Nothing to change'})
-    
+
     d = []
-    
+
     if not request.args.get("start_time") is None:
         d.append("start_time = '" + request.args["start_time"].replace("T", " ", 1) + "'")
     if not request.args.get("end_time") is None:

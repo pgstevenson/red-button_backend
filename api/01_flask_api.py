@@ -19,6 +19,7 @@ import re
 
 #### Initiation ----
 
+api_path = 'red-button_api'
 app = flask.Flask(__name__)
 CORS(app) # add this line to overcome "No 'Access-Control-Allow-Origin' header is present on the requested resource." issue # look into security configuraiton
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-@app.route('/api/v1/clients/<int:client_id>/users/<int:user_id>/events/<int:event_id>/stop', methods=['GET', 'PATCH'])
+@app.route('/' + api_path + '/v1/clients/<int:client_id>/users/<int:user_id>/events/<int:event_id>/stop', methods=['GET', 'PATCH'])
 def stop_event(client_id, user_id, event_id):
 
     conn = None

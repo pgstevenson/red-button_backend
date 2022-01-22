@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 
-@app.route('/api/v1/clients/<int:client_id>/projects/create', methods=['GET', 'POST'])
+@app.route('/' + api_path + '/v1/clients/<int:client_id>/projects/create', methods=['GET', 'POST'])
 def create_project(client_id):
 
     conn = None
     if request.args.get('name') is None:
         return jsonify({'code':400, 'key':'name', 'value':'missing'})
-    
+
     parent_id = 'NULL'
     if not request.args.get('parent_id') is None:
         parent_id = request.args['parent_id']

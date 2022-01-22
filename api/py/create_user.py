@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 
-@app.route('/api/v1/clients/<int:client_id>/users/create', methods=['GET', 'POST'])
+@app.route('/' + api_path + '/v1/clients/<int:client_id>/users/create', methods=['GET', 'POST'])
 def create_user(client_id):
-  
+
   conn = None
 
   d = {'name': "'" + request.args['name'] + "'",
        'email': "'" + request.args['email'] + "'",
        'manager_id': 'NULL'}
-       
+
   try:
     params = config()
     conn = psycopg2.connect(**params)

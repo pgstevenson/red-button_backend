@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-@app.route('/api/v1/clients', methods=['GET'])
+@app.route('/' + api_path + '/v1/clients', methods=['GET'])
 def list_clients():
 
     conn = None
