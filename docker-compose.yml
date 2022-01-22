@@ -12,7 +12,7 @@ services:
     volumes:
       - ./01_database_init.sql:/docker-entrypoint-initdb.d/01_init.sql
       - ./data:/home/data
-      - dbdata:/var/lib/postgresql/data/
+      - red-button_dbdata:/var/lib/postgresql/data/
     ports:
       - 5432:5432
   red-button_api:

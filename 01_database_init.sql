@@ -59,7 +59,7 @@ INSERT INTO project_users (id, project_id, user_id, project_admin)
 VALUES (1, 1, 1, 't');
 
 INSERT INTO events (id, user_id, start_time, end_time, task_id, description)
-VALUES (1, 5, '2022-01-25 08:30:00 Australia/Perth', '2022-01-25 08:35:00 Australia/Perth', 3, 'Office admin');
+VALUES (1, 1, '2022-01-25 08:30:00 Australia/Perth', '2022-01-25 08:35:00 Australia/Perth', 3, 'Office admin');
 
  /* Re-set sequences after data upload */
 
