@@ -1,6 +1,6 @@
 version: "3.6"
 services:
-  db:
+  red-button_db:
     image: postgres:11-alpine
     container_name: red-button_db
     networks:
@@ -15,7 +15,7 @@ services:
       - dbdata:/var/lib/postgresql/data/
     ports:
       - 5432:5432
-  api:
+  red-button_api:
     image: pgstevenson/red_button_api
     container_name: red-button_api
     restart: on-failure
@@ -24,11 +24,11 @@ services:
     ports:
       - 5000:5000
     depends_on:
-      - db
+      - red-button_db
 
 networks:
   net:
     name: net
 
 volumes:
-  dbdata:
+  red-button_dbdata:
