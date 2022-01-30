@@ -25,18 +25,22 @@ CORS(app) # add this line to overcome "No 'Access-Control-Allow-Origin' header i
 
 #### source external @app.route from files ----
 
-exec(open('py/create_client.py').read())
-exec(open('py/create_event.py').read())
-exec(open('py/create_user.py').read())
-exec(open('py/create_project.py').read())
-exec(open('py/create_project_user.py').read())
-exec(open('py/get_client.py').read())
-exec(open('py/get_project.py').read())
-exec(open('py/get_user.py').read())
-exec(open('py/list_clients.py').read())
-exec(open('py/stop_event.py').read())
-# exec(open('py/time_zones.py').read())
-exec(open('py/update_event.py').read())
+exec(open('py/clientCreate.py').read())
+exec(open('py/clientGet.py').read())
+exec(open('py/clientProjectCreate.py').read())
+exec(open('py/clientProjectsGet.py').read())
+exec(open('py/clientProjectUserCreate.py').read())
+exec(open('py/clientProjectUsersGet.py').read())
+exec(open('py/clientsGet.py').read())
+exec(open('py/clientUserCreate.py').read())
+exec(open('py/clientUserEventCreate.py').read())
+exec(open('py/clientUserEventGet.py').read())
+exec(open('py/clientUserEventsGet.py').read())
+exec(open('py/clientUserEventStop.py').read())
+exec(open('py/clientUserEventUpdate.py').read())
+exec(open('py/clientUserGet.py').read())
+exec(open('py/clientUserProjectsGet.py').read())
+# exec(open('py/timeZones.py').read())
 
 #### house keeping ----
 
